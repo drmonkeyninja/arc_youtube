@@ -210,9 +210,9 @@ function arc_youtube($atts,$thing)
     
         if (!$width || !$height) {
           // calculate the aspect ratio
-          preg_match("(/[0-9]+):([0-9]+)/",$ratio,$matches);
-          if ($matches[0]) {
-            $aspect = $matches[0][1]/$matches[0][2];
+          preg_match("/([0-9]+):([0-9]+)/",$ratio,$matches);
+          if ($matches[0] && $matches[1]!=0 && $matches[2]!=0) {
+            $aspect = $matches[1]/$matches[2];
           } else {
             $aspect = 1.333;
           }
