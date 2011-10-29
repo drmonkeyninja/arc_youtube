@@ -176,6 +176,10 @@ function arc_youtube($atts,$thing)
 
         }
         
+    } elseif (preg_match("/^[a-zA-Z]+[:\/\/]+youtu\.be\/([A-Za-z0-9]+)/i",$video,$matches)) {
+
+        $v = $matches[1];
+        
     } elseif ($video) {
 
         $v = $video;
