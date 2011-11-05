@@ -10,13 +10,13 @@
 // file name. Uncomment and edit this line to override:
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '0.3';
+$plugin['version'] = '0.4';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://www.redhotchilliproject.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
 $plugin['type'] = 0; // 0 for regular plugin; 1 if it includes admin-side code
 
-@include_once('zem_tpl.php');
+@include_once('../zem_tpl.php');
 
 if (0) {
 ?>
@@ -81,6 +81,7 @@ You can customise the appearance of the Youtube flash player using this plugin t
 |hd|'1' to play video in HD, '0' to for normal play|0| |
 |auto|'1' to autoplay the video, '0' to turn off autoplay (default)|0| |
 |privacy|'1' for enhanced privacy mode, no cookies unless the user clicks play, '0' normal mode|0|privacy='1'|
+|ssl|'1' to use HTTPS protocol|0| |
 |lang|Language code for player, by default this is set to English "en"|en|lang="fr"|
 
 
@@ -117,10 +118,6 @@ bc. <txp:arc_youtube playlist="2DBFB60D581AB901" />
 
 # --- BEGIN PLUGIN CODE ---
 
-/*
-   arc_youtube v0.2.1
-*/
-
 function arc_youtube($atts,$thing)
 {
 	global $thisarticle;
@@ -138,6 +135,7 @@ function arc_youtube($atts,$thing)
         'fs'        => '1',
         'hd'        => '0',
         'privacy'   => '0',
+        'ssl'       => '0',
         'auto'      => '0',
         'lang'      => 'en',
         'link'      => '0',
@@ -196,11 +194,13 @@ function arc_youtube($atts,$thing)
 
     if ($p) {
 
-        $vlink = 'http://www.youtube'.(($privacy)?'nocookie':'').'.com/p/'.$p;
+        $vlink = 'http'.(($ssl)?'s':'').'://www.youtube'
+          .(($privacy)?'-nocookie':'').'.com/p/'.$p;
 
     } elseif ($v) {
 
-        $vlink = 'http://www.youtube'.(($privacy)?'nocookie':'').'.com/v/'.$v;
+        $vlink = 'http'.(($ssl)?'s':'').'://www.youtube'
+          .(($privacy)?'-nocookie':'').'.com/embed/'.$v;
 
     }
 
