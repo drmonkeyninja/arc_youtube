@@ -14,7 +14,10 @@ $plugin['version'] = '0.4';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://www.redhotchilliproject.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
-$plugin['type'] = 0; // 0 for regular plugin; 1 if it includes admin-side code
+$plugin['type'] = 1; // 0 for regular plugin; 1 if it includes admin-side code
+
+if (!defined('PLUGIN_LIFECYCLE_NOTIFY')) define('PLUGIN_LIFECYCLE_NOTIFY', 0x0002);
+$plugin['flags'] = PLUGIN_LIFECYCLE_NOTIFY;
 
 @include_once('../zem_tpl.php');
 
@@ -117,6 +120,11 @@ bc. <txp:arc_youtube playlist="2DBFB60D581AB901" />
 }
 
 # --- BEGIN PLUGIN CODE ---
+
+if (@txpinterface == 'admin')
+{
+	register_callback('_arc_youtube_auto_enable', 'plugin_lifecycle.arc_youtube', 'installed');
+}
 
 function arc_youtube($atts,$thing)
 {
@@ -256,6 +264,17 @@ function arc_youtube($atts,$thing)
 
     }
 
+}
+
+// Auto enable plugin on install (original idea by Michael Manfre)
+function _arc_youtube_auto_enable($event, $step)
+{ 
+  $plugin = substr($event, strlen('plugin_lifecycle.'));
+  $prefix = 'arc_youtube';
+  if (strncmp($plugin, $prefix, strlen($prefix)) == 0)
+  {
+    safe_update('txp_plugin', "status = 1", "name = '" . doSlash($plugin) . "'");
+  }
 }
 
 # --- END PLUGIN CODE ---
