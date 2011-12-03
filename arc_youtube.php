@@ -77,15 +77,11 @@ You can customise the appearance of the Youtube flash player using this plugin t
 |width|Width of video|0|width="200"|
 |height|Height of video|0|height="150"|
 |ratio|Aspect ratio|4:3|ration="16:9"|
-|color1|Six-digit hexadecimal colour code (if color1 and color2 are unset then the default Youtube colour scheme is used)| _unset_|color1="2b405b"|
-|color2|Six-digit hexadecimal colour code| _unset_|color2="6b8ab6"|
-|border|'1' to show border, '0' to hide border|0|border="1"|
 |fs|'1' to allow full screen, '0' to  disable full screen mode|1| |
 |hd|'1' to play video in HD, '0' to for normal play|0| |
 |auto|'1' to autoplay the video, '0' to turn off autoplay (default)|0| |
 |privacy|'1' for enhanced privacy mode, no cookies unless the user clicks play, '0' normal mode|0|privacy='1'|
 |ssl|'1' to use HTTPS protocol|0| |
-|lang|Language code for player, by default this is set to English "en"|en|lang="fr"|
 
 
 h3. Examples
@@ -144,7 +140,6 @@ function arc_youtube($atts,$thing)
         'privacy'   => '0',
         'ssl'       => '0',
         'auto'      => '0',
-        'lang'      => 'en',
         'link'      => '0',
         'label'     => '',
         'labeltag'  => '',
