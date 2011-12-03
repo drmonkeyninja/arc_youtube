@@ -10,7 +10,7 @@
 // file name. Uncomment and edit this line to override:
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '0.4';
+$plugin['version'] = '1.0';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://www.redhotchilliproject.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
@@ -27,12 +27,12 @@ if (0) {
 
 h3. Description
 
-Easily embed valid XHTML 1.0 markup Youtube videos in articles and customise the appearance of the player.
+Easily embed Youtube videos in articles and customise the appearance of the player. arc_youtube uses the new iframe player. 
 
 
 h3. Installation
 
-To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Finally activate the plugin. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
+To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
 
 
 h3. Syntax
@@ -137,11 +137,10 @@ function arc_youtube($atts,$thing)
         'width'     => '0',
         'height'    => '0',
         'ratio'     => '4:3',
-        'color1'    => '',
-        'color2'    => '',
-        'border'    => '0',
+        'color'    => 'red', // or 'white'
         'fs'        => '1',
-        'hd'        => '0',
+        'start'     => 0,
+        'theme'     => 'dark',
         'privacy'   => '0',
         'ssl'       => '0',
         'auto'      => '0',
@@ -238,18 +237,13 @@ function arc_youtube($atts,$thing)
         $src = $vlink.'&amp;hl='.$lang
             .(($fs)?'&amp;fs=1':'')
             .(($auto)?'&amp;autoplay=1':'')
-            .(($color1)?'&amp;color1=0x'.$color1:'')
-            .(($color2)?'&amp;color2=0x'.$color2:'')
-            .(($border)?'&amp;border=1':'')
-            .(($hd)?'?hd=1':'');
+            .'&amp;color='(($color=='red')?'red':'white')
+            .'&amp;theme='(($theme=='dark')?'dark':'light')
+            .(($hd)?'&amp;hd=1':'');
 
-        $out = '<object type="application/x-shockwave-flash" '
-            .'style="width:'.$width.'px; height:'.$height.'px;" '
-            .'data="'.$src.'">'
-            .'<param name="movie" value="'.$src.'"></param>'
-            .'<param name="allowFullScreen" value="'.(($fs)?'true':'false').'"></param>'
-            .'<param name="allowscriptaccess" value="always"></param>'
-            .'</object>';
+        $out = '<iframe width="'.$width.'" height="'.$height
+          .'" src="'.$src.'" frameborder="0"'
+          .(($fs)?' allowfullscreen':'').'></iframe>';
 
         if ($link) {
 
