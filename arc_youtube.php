@@ -229,11 +229,10 @@ function arc_youtube($atts,$thing)
           }
         }
 
-        $src = $vlink.'&amp;hl='.$lang
+        $src = $vlink.'?theme='.(($theme=='dark')?'dark':'light')
+            .'&amp;color='.(($color=='red')?'red':'white')
             .(($fs)?'&amp;fs=1':'')
             .(($auto)?'&amp;autoplay=1':'')
-            .'&amp;color='.(($color=='red')?'red':'white')
-            .'&amp;theme='.(($theme=='dark')?'dark':'light')
             .(($hd)?'&amp;hd=1':'');
 
         $out = '<iframe width="'.$width.'" height="'.$height
