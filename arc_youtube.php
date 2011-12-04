@@ -55,6 +55,7 @@ h4. Video and playlists
 |_. Attribute|_. Description|_. Default|_. Example|
 |video|Youtube url[1] or video ID for the video you want to embed| _unset_|video="ta7VHKGuoJY"|
 |playlist|Youtube playlist ID for the playlist you want to embed| _unset_|playlist="2DBFB60D581AB901"|
+|start|Start position of the video as an integer|0|start="60"|
 |custom|Name of the custom field containing video IDs/urls associated with article|Youtube ID|custom="video"|
 
 fn1. The url can be either for an individual video or for a playlist.
@@ -77,6 +78,8 @@ You can customise the appearance of the Youtube flash player using this plugin t
 |width|Width of video|0|width="200"|
 |height|Height of video|0|height="150"|
 |ratio|Aspect ratio|4:3|ration="16:9"|
+|theme|Use either the "dark" or "light" Youtube player|dark|theme="light"|
+|color|Use either a "red" or "white" video progress bar|red|color="white"|
 |fs|'1' to allow full screen, '0' to  disable full screen mode|1| |
 |hd|'1' to play video in HD, '0' to for normal play|0| |
 |auto|'1' to autoplay the video, '0' to turn off autoplay (default)|0| |
@@ -233,7 +236,8 @@ function arc_youtube($atts,$thing)
             .'&amp;color='.(($color=='red')?'red':'white')
             .(($fs)?'&amp;fs=1':'')
             .(($auto)?'&amp;autoplay=1':'')
-            .(($hd)?'&amp;hd=1':'');
+            .(($hd)?'&amp;hd=1':'')
+            .(($start)?'&amp;start='.$start:'');
 
         $out = '<iframe width="'.$width.'" height="'.$height
           .'" src="'.$src.'" frameborder="0"'
