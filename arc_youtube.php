@@ -208,7 +208,7 @@ function arc_youtube($atts,$thing)
     } elseif ($v) {
 
         $vlink = 'http'.(($ssl)?'s':'').'://www.youtube'
-          .(($privacy)?'-nocookie':'').'.com/embed/'.$v;
+          .(($privacy)?'-nocookie':'').'.com/v/'.$v;
 
     }
 
@@ -235,7 +235,7 @@ function arc_youtube($atts,$thing)
           }
         }
 
-        $src = $vlink.'&amp;hl='.$lang
+        $src = $vlink.'?hl='.$lang
             .(($fs)?'&amp;fs=1':'')
             .(($auto)?'&amp;autoplay=1':'')
             .(($color1)?'&amp;color1=0x'.$color1:'')
