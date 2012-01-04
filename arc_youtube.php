@@ -10,7 +10,7 @@
 // file name. Uncomment and edit this line to override:
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '1.0';
+$plugin['version'] = '1.0.1';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://www.redhotchilliproject.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
@@ -136,8 +136,9 @@ function arc_youtube($atts,$thing)
         'width'     => '0',
         'height'    => '0',
         'ratio'     => '4:3',
-        'color'    => 'red', // or 'white'
+        'color'     => 'red', // or 'white'
         'fs'        => '1',
+        'hd'        => 0,
         'start'     => 0,
         'theme'     => 'dark',
         'privacy'   => '0',
