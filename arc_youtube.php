@@ -10,7 +10,7 @@
 // file name. Uncomment and edit this line to override:
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '1.0.1';
+$plugin['version'] = '1.0-dev';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://www.redhotchilliproject.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
@@ -247,7 +247,7 @@ function arc_youtube($atts,$thing)
         if ($link) {
 
             $url = 'www.youtube.com/watch?v='.$v;
-            $out.= '<p><a href="http://'.$url.'">'
+            $out.= '<p><a href="http://'.$url.'" rel="external">'
                 .(($thing)?parse($thing):$url)
                 .'</a></p>';
 
