@@ -10,7 +10,7 @@
 // file name. Uncomment and edit this line to override:
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '1.0-dev';
+$plugin['version'] = '1.0.2';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://www.redhotchilliproject.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
