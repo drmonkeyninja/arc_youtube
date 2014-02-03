@@ -19,7 +19,7 @@ $plugin['type'] = 1; // 0 for regular plugin; 1 if it includes admin-side code
 if (!defined('PLUGIN_LIFECYCLE_NOTIFY')) define('PLUGIN_LIFECYCLE_NOTIFY', 0x0002);
 $plugin['flags'] = PLUGIN_LIFECYCLE_NOTIFY;
 
-@include_once('../zem_tpl.php');
+@include_once('zem_tpl.php');
 
 if (0) {
 ?>
