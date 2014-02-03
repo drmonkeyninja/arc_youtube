@@ -83,6 +83,7 @@ You can customise the appearance of the Youtube flash player using this plugin t
 |fs|'1' to allow full screen, '0' to  disable full screen mode|1| |
 |hd|'1' to play video in HD, '0' to for normal play|0| |
 |auto|'1' to autoplay the video, '0' to turn off autoplay (default)|0| |
+|cc|'1' to display captions/subtitles by default, '0' to use the user's preference|0| |
 |privacy|'1' for enhanced privacy mode, no cookies unless the user clicks play, '0' normal mode|0|privacy='1'|
 |ssl|'1' to use HTTPS protocol|0| |
 
@@ -139,6 +140,7 @@ function arc_youtube($atts,$thing)
         'color'     => 'red', // or 'white'
         'fs'        => '1',
         'hd'        => 0,
+        'cc'        => 0,
         'start'     => 0,
         'theme'     => 'dark',
         'privacy'   => '0',
@@ -239,6 +241,8 @@ function arc_youtube($atts,$thing)
             .(($auto)?'&amp;autoplay=1':'')
             .(($hd)?'&amp;hd=1':'')
             .(($start)?'&amp;start='.$start:'');
+
+        $src .= $cc ? '&amp;cc_load_policy=1' : '';
 
         $out = '<iframe width="'.$width.'" height="'.$height
           .'" src="'.$src.'" frameborder="0"'
