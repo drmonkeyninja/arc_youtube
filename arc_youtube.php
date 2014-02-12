@@ -189,6 +189,54 @@ function arc_youtube($atts, $thing)
 
     }
 
+    $src = '//www.youtube' . ($privacy ? '-nocookie' : '') . '.com/embed/';
+
+    $src .= !empty($v) ? $v : null;
+
+    $qString = array();
+
+    // Setup the playlist.
+    if (!empty($p)) {
+        $qString[] = 'listType=playlist';
+        $qString[] = 'list=' . $p;
+    }
+
+    // Set the player UI's theme and colour.
+    $qString[] = 'theme=' . ($theme=='dark' ? 'dark' : 'light');
+    $qString[] = 'color=' . ($color=='red' ? 'red' : 'white');
+
+    // Disable the fullscreen button in the AS3 player (not supported by the 
+    // newer HTML5 player).
+    if (!$fs) {
+        $qString[] = 'fs=0';
+    }
+
+    // Enable autoplay.
+    if ($auto) {
+        $qString[] = 'autoplay=1';
+    }
+
+    // Set the start position of the video.
+    if ($start) {
+        $qString[] = 'start=' . $start;
+    }
+
+    // Enable captions on by default in the AS3 player (not supported by the
+    // newer HTML5 player).
+    if ($cc) {
+        $qString[] = 'cc_load_policy=1';
+    }
+
+    // Disable related videos.
+    if (!$related) {
+        $qString[] = 'rel=0';
+    }
+
+    // Check if we need to append a query string to the video src.
+    if (!empty($qString)) {
+        $src .= '?' . implode('&amp;', $qString);
+    }
+
     if ($v||$p) {
     
         $toolbar_h = 25;
@@ -211,16 +259,6 @@ function arc_youtube($atts, $thing)
             $height = 344;
           }
         }
-
-        $src = $vlink.'?theme='.(($theme=='dark')?'dark':'light')
-            .'&amp;color='.(($color=='red')?'red':'white')
-            .(($fs)?'&amp;fs=1':'')
-            .(($auto)?'&amp;autoplay=1':'')
-            .(($hd)?'&amp;hd=1':'')
-            .(($start)?'&amp;start='.$start:'');
-
-        $src .= $cc ? '&amp;cc_load_policy=1' : '';
-        $src .= $related ? '&amp;rel=1' : '&amp;rel=0';
 
         $out = '<iframe width="'.$width.'" height="'.$height
           .'" src="'.$src.'" frameborder="0"'
