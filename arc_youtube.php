@@ -140,6 +140,7 @@ function arc_youtube($atts, $thing)
         'controls'  => null,
         'annotations' => null, // 1 or 3
         'loop'      => 0,
+        'modestbranding' => null,
         'link'      => '0',
         'label'     => '',
         'labeltag'  => '',
@@ -212,6 +213,11 @@ function arc_youtube($atts, $thing)
     // Enable looping of the video.
     if ($loop) {
         $qString[] = 'loop=1';
+    }
+
+    // Enable modest browsing (removes the Youtube logo from the controls).
+    if ($modestbranding) {
+        $qString[] = 'modestbranding=1';
     }
 
     // Set the start position of the video.
