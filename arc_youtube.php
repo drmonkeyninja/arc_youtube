@@ -269,6 +269,16 @@ function arc_youtube($atts, $thing)
 }
 
 
+function arc_if_youtube($atts, $thing)
+{
+    extract(lAtts(array(
+        'video' => ''
+    ), $atts));
+
+    return parse(EvalElse($thing, _arc_is_youtube($video)));
+}
+
+
 function _arc_youtube($video)
 {
     if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.youtube\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i", $video)) {
