@@ -142,6 +142,7 @@ function arc_youtube($atts, $thing)
         'loop'      => 0,
         'modestbranding' => null,
         'playsinline' => null, // 0 or 1
+        'title'     => null,
         'link'      => '0',
         'label'     => '',
         'labeltag'  => '',
@@ -207,7 +208,7 @@ function arc_youtube($atts, $thing)
     }
 
     // Enable/Disable annotations display by default.
-    if ($annotations!==null && in_array($annotations, array(1, 2))) {
+    if ($annotations!==null && in_array($annotations, array(1, 3))) {
         $qString[] = 'iv_load_policy=' . $annotations;
     }
 
@@ -228,6 +229,11 @@ function arc_youtube($atts, $thing)
     // Set the start position of the video.
     if ($start) {
         $qString[] = 'start=' . $start;
+    }
+
+    // Show or hide the video title and other information.
+    if ($title!==null) {
+        $qString[] = 'showinfo=' . ($title ? '1' : '0');
     }
 
     // Enable captions on by default in the AS3 player (not supported by the
