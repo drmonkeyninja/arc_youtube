@@ -139,6 +139,7 @@ function arc_youtube($atts, $thing)
         'autohide'  => null,
         'controls'  => null,
         'annotations' => null, // 1 or 3
+        'loop'      => 0,
         'link'      => '0',
         'label'     => '',
         'labeltag'  => '',
@@ -206,6 +207,11 @@ function arc_youtube($atts, $thing)
     // Enable/Disable annotations display by default.
     if ($annotations!==null && in_array($annotations, array(1, 2))) {
         $qString[] = 'iv_load_policy=' . $annotations;
+    }
+
+    // Enable looping of the video.
+    if ($loop) {
+        $qString[] = 'loop=1';
     }
 
     // Set the start position of the video.
