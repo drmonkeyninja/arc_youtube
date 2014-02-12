@@ -136,6 +136,8 @@ function arc_youtube($atts, $thing)
         'theme'     => 'dark',
         'privacy'   => '0',
         'auto'      => '0',
+        'autohide'  => null,
+        'controls'  => null,
         'link'      => '0',
         'label'     => '',
         'labeltag'  => '',
@@ -190,6 +192,14 @@ function arc_youtube($atts, $thing)
     // Enable autoplay.
     if ($auto) {
         $qString[] = 'autoplay=1';
+    }
+
+    // Determine the appearance of the player's controls.
+    if ($autohide!==null && in_array($autohide, array(0, 1, 2))) {
+        $qString[] = 'autohide=' . $autohide;
+    }
+    if ($controls!==null && in_array($controls, array(0, 1, 2))) {
+        $qString[] = 'controls=' . $controls;
     }
 
     // Set the start position of the video.
