@@ -141,6 +141,7 @@ function arc_youtube($atts, $thing)
         'annotations' => null, // 1 or 3
         'loop'      => 0,
         'modestbranding' => null,
+        'playsinline' => null, // 0 or 1
         'link'      => '0',
         'label'     => '',
         'labeltag'  => '',
@@ -218,6 +219,10 @@ function arc_youtube($atts, $thing)
     // Enable modest browsing (removes the Youtube logo from the controls).
     if ($modestbranding) {
         $qString[] = 'modestbranding=1';
+    }
+
+    if ($playsinline!==null && in_array($playsinline, array(0, 1))) {
+        $qString[] = 'playsinline=' . $playsinline;
     }
 
     // Set the start position of the video.
