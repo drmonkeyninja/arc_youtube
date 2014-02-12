@@ -127,7 +127,7 @@ if (@txpinterface == 'admin')
 	register_callback('_arc_youtube_auto_enable', 'plugin_lifecycle.arc_youtube', 'installed');
 }
 
-function arc_youtube($atts,$thing)
+function arc_youtube($atts, $thing)
 {
 	global $thisarticle;
 
@@ -160,46 +160,21 @@ function arc_youtube($atts,$thing)
         $video = $thisarticle[$custom];
     }
 
-    $v = ""; $p = "";
+    $v = null;
+    $p = null;
 
     // Check for Youtube video ID or Youtube URL to extract ID from
-
-    if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.youtube\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i",$video)) {
-
-        $urlc = parse_url($video);
-        $qstr = $urlc['query'];
-        parse_str($qstr, $qarr);
-
-        if (isset($qarr['v'])) {
-
-            $v = $qarr['v'];
-
-        } elseif (isset($qarr['p'])) {
-
-            $p = $qarr['p'];
-
-        } else {
-
-            return '';
-
-        }
-        
-    } elseif (preg_match("/^[a-zA-Z]+[:\/\/]+youtu\.be\/([A-Za-z0-9]+)/i",$video,$matches)) {
-
-        $v = $matches[1];
-        
-    } elseif ($video) {
-
+    $match = _arc_youtube($video);
+    if (!empty($match['v'])) {
+        $v = $match['v'];
+    } elseif (!empty($match['p'])) {
+        $p = $match['p'];
+    } elseif (!empty($video)) {
         $v = $video;
-
-    } elseif ($playlist) {
-
+    } elseif (!empty($playlist)) {
         $p = $playlist;
-
     } else {
-
         return '';
-
     }
 
     if ($p) {
@@ -265,6 +240,39 @@ function arc_youtube($atts,$thing)
     }
 
 }
+
+
+function _arc_youtube($video)
+{
+    if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.youtube\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i", $video)) {
+        
+        $urlc = parse_url($video);
+        $qstr = $urlc['query'];
+        parse_str($qstr, $qarr);
+
+        if (isset($qarr['v'])) {
+
+            return array('v' => $qarr['v']);
+
+        } elseif (isset($qarr['p'])) {
+
+            return array('p' => $qarr['p']);
+
+        } else {
+
+            return false;
+
+        }
+
+    }  elseif (preg_match("/^[a-zA-Z]+[:\/\/]+youtu\.be\/([A-Za-z0-9]+)/i", $video, $matches)) {
+
+        return array('v' => $matches[1]);
+        
+    }
+
+    return false;
+}
+
 
 // Auto enable plugin on install (original idea by Michael Manfre)
 function _arc_youtube_auto_enable($event, $step)
