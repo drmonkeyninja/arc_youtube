@@ -177,18 +177,6 @@ function arc_youtube($atts, $thing)
         return '';
     }
 
-    if ($p) {
-
-        $vlink = 'http'.(($ssl)?'s':'').'://www.youtube'
-          .(($privacy)?'-nocookie':'').'.com/p/'.$p;
-
-    } elseif ($v) {
-
-        $vlink = 'http'.(($ssl)?'s':'').'://www.youtube'
-          .(($privacy)?'-nocookie':'').'.com/embed/'.$v;
-
-    }
-
     $src = '//www.youtube' . ($privacy ? '-nocookie' : '') . '.com/embed/';
 
     $src .= !empty($v) ? $v : null;
@@ -237,45 +225,46 @@ function arc_youtube($atts, $thing)
         $src .= '?' . implode('&amp;', $qString);
     }
 
-    if ($v||$p) {
-    
-        $toolbar_h = 25;
-    
-        if (!$width || !$height) {
-          // calculate the aspect ratio
-          preg_match("/([0-9]+):([0-9]+)/",$ratio,$matches);
-          if ($matches[0] && $matches[1]!=0 && $matches[2]!=0) {
+    // If the width and/or height has not been set we want to calculate new
+    // ones using the aspect ratio.
+    if (!$width || !$height) {
+
+        $toolbarHeight = 25;
+        
+        // Work out the aspect ratio.
+        preg_match("/(\d+):(\d+)/", $ratio, $matches);
+        if ($matches[0] && $matches[1]!=0 && $matches[2]!=0) {
             $aspect = $matches[1]/$matches[2];
-          } else {
+        } else {
             $aspect = 1.333;
-          }
-          // calcuate the new width/height
-          if ($width) {
-            $height = $width/$aspect + $toolbar_h;
-          } elseif ($height) {
-            $width = ($height-$toolbar_h)*$aspect;
-          } else {
+        }
+
+        // Calcuate the new width/height.
+        if ($width) {
+            $height = $width/$aspect + $toolbarHeight;
+        } elseif ($height) {
+            $width = ($height-$toolbarHeight)*$aspect;
+        } else {
             $width = 425;
             $height = 344;
-          }
         }
-
-        $out = '<iframe width="'.$width.'" height="'.$height
-          .'" src="'.$src.'" frameborder="0"'
-          .(($fs)?' allowfullscreen':'').'></iframe>';
-
-        if ($link) {
-
-            $url = 'www.youtube.com/watch?v='.$v;
-            $out.= '<p><a href="http://'.$url.'" rel="external">'
-                .(($thing)?parse($thing):$url)
-                .'</a></p>';
-
-        }
-
-        return doLabel($label, $labeltag).(($wraptag) ? doTag($out, $wraptag, $class) : $out);
 
     }
+
+    $out = '<iframe width="'.$width.'" height="'.$height
+      .'" src="'.$src.'" frameborder="0"'
+      .(($fs)?' allowfullscreen':'').'></iframe>';
+
+    if ($link) {
+
+        $url = 'www.youtube.com/watch?v='.$v;
+        $out.= '<p><a href="http://'.$url.'" rel="external">'
+            .(($thing)?parse($thing):$url)
+            .'</a></p>';
+
+    }
+
+    return doLabel($label, $labeltag).(($wraptag) ? doTag($out, $wraptag, $class) : $out);
 
 }
 
