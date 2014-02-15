@@ -95,6 +95,13 @@ The arc_is_youtube tag is a _conditional tag_ and always used as an opening and 
 
 bc. <txp:arc_is_youtube video='[URL]'></txp:arc_is_youtube>
 
+h4. Parameters
+
+Use one or the other of the following:-
+
+* _custom_ - Name of the custom field containing video IDs/urls associated with article
+* _video_ - A URL to check if it is a valid Youtube URL
+
 h2(#help-section04). Examples
 
 h3. Example 1: Use custom field to associate video with an article
@@ -328,11 +335,16 @@ function arc_youtube($atts, $thing)
 
 function arc_if_youtube($atts, $thing)
 {
+    global $thisarticle;
+
     extract(lAtts(array(
-        'video' => ''
+        'custom' => null,
+        'video' => null
     ), $atts));
 
-    return parse(EvalElse($thing, _arc_is_youtube($video)));
+    $result = $video ? _arc_is_youtube($video) : _arc_is_youtube($thisarticle[strtolower($custom)]);
+
+    return parse(EvalElse($thing, $result));
 }
 
 
