@@ -66,14 +66,16 @@ h4. Basic attributes
 
 h4. Customising the Youtube player
 
+Some of the attributes with this plugin are subject to change if Youtube change their supported parameters for the player. Some will not work with the HTML5 player which the player defaults to if the browser supports it.
+
 * _width_ - Width of video
 * _height_ - Height of video
 * _ratio_ - Aspect ratio (defaults to 4:3)
 * _theme_ - Use either the "dark" or "light" Youtube player
 * _color_ - Use either a "red" or "white" video progress bar
 * _modestbranding_ - '1' to prevent the YouTube logo from displaying in the control bar
-* _fs_ - '1' to allow full screen, '0' to  disable full screen mode
-* _cc_ - '1' to display captions/subtitles by default, '0' to use the user's preference
+* _fs_ - '1' to allow full screen, '0' to  disable full screen mode[2]
+* _cc_ - '1' to display captions/subtitles by default, '0' to use the user's preference[2]
 * _related_ - '1' to show related videos, '0' to turn them off
 * _privacy_ - '1' for enhanced privacy mode, no cookies unless the user clicks play, '0' normal mode
 * _autohide_ - '2' for the video progress bar to fade out while the player controls (play button, volume control, etc.) remain visible; '1' for the video progress bar and the player controls will slide out of view a couple of seconds after the video starts playing; or '0' to always show the progress bar and controls
@@ -81,11 +83,13 @@ h4. Customising the Youtube player
 * _annotations_ - '1' to show annotations, '3' to hide them
 * _title_ - '0' to hide the video's title and other information, '1' by default to show the information
 
-h3. arc_is_youtube
+fn2. Not supported by the HTML5 player.
+
+h3. arc_if_youtube
 
 The arc_is_youtube tag is a _conditional tag_ and always used as an opening and closing pair. It will render the content between the tags if the video attribute is a valid Youtube URL.
 
-bc. <txp:arc_is_youtube video='[URL]'></txp:arc_is_youtube>
+bc. <txp:arc_if_youtube video='[URL]'></txp:arc_if_youtube>
 
 h4. Parameters
 
