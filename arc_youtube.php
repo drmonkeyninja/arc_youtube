@@ -2,7 +2,7 @@
 
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '2.0.1';
+$plugin['version'] = '2.0.2';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://andy-carter.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
@@ -23,8 +23,9 @@ h2. Table of contents
 # "Plugin requirements":#help-section01
 # "Installation":#help-section02
 # "Tags":#help-section03
-# "Author":#help-section04
-# "License":#help-section05
+# "Examples":#help-section04
+# "Author":#help-section05
+# "License":#help-section06
 
 h2(#help-section01). Plugin requirements
 
@@ -116,11 +117,11 @@ bc. <txp:arc_youtube width="200" video="tgbNymZ7vqY" />
 
 Here the video is defined within the tag using the video attribute which has been given the value of Youtube's video ID, alternatively this value could have been the video's URL.
 
-h2(#help-section04). Author
+h2(#help-section05). Author
 
 "Andy Carter":http://andy-carter.com. For other Textpattern plugins by me visit my "Plugins page":http://andy-carter.com/txp.
 
-h2(#help-section05). License
+h2(#help-section06). License
 
 The MIT License (MIT)
 
