@@ -1,0 +1,5 @@
+h1. arc_youtube
+
+A Textpattern plugin for easily embedding Youtube videos in pages using a customisable player.
+
+* "Full documentation and the latest download link":http://andy-carter.com/txp/arc_youtube
