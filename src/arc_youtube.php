@@ -90,7 +90,7 @@ h3. arc_if_youtube
 
 The arc_is_youtube tag is a _conditional tag_ and always used as an opening and closing pair. It will render the content between the tags if the video attribute is a valid Youtube URL.
 
-bc. <txp:arc_if_youtube video='[URL]'></txp:arc_if_youtube>
+bc. <txp:arc_if_youtube video="[URL]"></txp:arc_if_youtube>
 
 h4. Parameters
 
