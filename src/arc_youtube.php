@@ -2,7 +2,7 @@
 
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '2.0.2';
+$plugin['version'] = '2.0.3';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://andy-carter.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
@@ -125,7 +125,7 @@ h2(#help-section06). License
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Andy Carter
+Copyright (c) 2016 Andy Carter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -210,7 +210,7 @@ function arc_youtube($atts, $thing)
     $qString[] = 'theme=' . ($theme=='dark' ? 'dark' : 'light');
     $qString[] = 'color=' . ($color=='red' ? 'red' : 'white');
 
-    // Disable the fullscreen button in the AS3 player (not supported by the 
+    // Disable the fullscreen button in the AS3 player (not supported by the
     // newer HTML5 player).
     if (!$fs) {
         $qString[] = 'fs=0';
@@ -279,7 +279,7 @@ function arc_youtube($atts, $thing)
     if (!$width || !$height) {
 
         $toolbarHeight = 25;
-        
+
         // Work out the aspect ratio.
         preg_match("/(\d+):(\d+)/", $ratio, $matches);
         if ($matches[0] && $matches[1]!=0 && $matches[2]!=0) {
@@ -336,7 +336,7 @@ function arc_if_youtube($atts, $thing)
 function _arc_youtube($video)
 {
     if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.youtube\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i", $video)) {
-        
+
         $urlc = parse_url($video);
         $qstr = $urlc['query'];
         parse_str($qstr, $qarr);
@@ -358,7 +358,7 @@ function _arc_youtube($video)
     }  elseif (preg_match("/^[a-zA-Z]+[:\/\/]+youtu\.be\/([A-Za-z0-9]+)/i", $video, $matches)) {
 
         return array('v' => $matches[1]);
-        
+
     }
 
     return false;
