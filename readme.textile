@@ -2,4 +2,101 @@ h1. arc_youtube
 
 A Textpattern plugin for easily embedding Youtube videos in pages using a customisable player.
 
-* "Full documentation and the latest download link":http://andy-carter.com/txp/arc_youtube
+This plugin works well with "arc_vimeo":https://github.com/drmonkeyninja/arc_vimeo and "oui_dailymotion":https://github.com/NicolasGraph/oui_dailymotion if you are looking to support Vimeo and DailyMotion too.
+
+h2. Table of contents
+
+# "Plugin requirements":#help-section01
+# "Installation":#help-section02
+# "Tags":#help-section03
+# "Examples":#help-section04
+
+h2(#help-section01). Plugin requirements
+
+arc_youtube's minimum requirements:
+
+* Textpattern 4.5+
+
+h2(#help-section02). Installation
+
+To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
+
+h2(#help-section03). Tags
+
+h3. arc_youtube
+
+Embeds a Youtube video in the page using an iframe.
+
+bc. <txp:arc_youtube />
+
+h4. Video and playlist attributes
+
+* _video_ - Youtube url[1] or video ID for the video you want to embed
+* _playlist_ - Youtube playlist ID for the playlist you want to embed
+* _custom_ - Name of the custom field containing video IDs/urls associated with article
+* _start_ - Start position of the video as an integer
+* _auto_ - '1' to autoplay the video, '0' to turn off autoplay (default)
+* _loop_ - '1' to play the video in a loop, '0' for a single play
+* _playsinline_ - '1' causes inline playback on iOS, '0' fullscreen playback
+
+fn1. The url can be either for an individual video or for a playlist.
+
+h4. Basic attributes
+
+* _link_ - Set to '1' to show a link to the Youtube video page below the player; the link text will be the URL or the text between opening and closing tags
+* _label_ - Label for the video
+* _labeltag_ - Independent wraptag for label
+* _wraptag_ - HTML tag to be used as the wraptag, without brackets
+* _class_ - CSS class attribute for wraptag
+
+h4. Customising the Youtube player
+
+Some of the attributes with this plugin are subject to change if Youtube change their supported parameters for the player. Some will not work with the HTML5 player which the player defaults to if the browser supports it.
+
+* _width_ - Width of video
+* _height_ - Height of video
+* _ratio_ - Aspect ratio (defaults to 4:3)
+* _theme_ - Use either the "dark" or "light" Youtube player
+* _color_ - Use either a "red" or "white" video progress bar
+* _modestbranding_ - '1' to prevent the YouTube logo from displaying in the control bar
+* _fs_ - '1' to allow full screen, '0' to  disable full screen mode[2]
+* _cc_ - '1' to display captions/subtitles by default, '0' to use the user's preference[2]
+* _related_ - '1' to show related videos, '0' to turn them off
+* _privacy_ - '1' for enhanced privacy mode, no cookies unless the user clicks play, '0' normal mode
+* _autohide_ - '2' for the video progress bar to fade out while the player controls (play button, volume control, etc.) remain visible; '1' for the video progress bar and the player controls will slide out of view a couple of seconds after the video starts playing; or '0' to always show the progress bar and controls
+* _controls_ - '2' to display the controls in the player, '0' to hide them
+* _annotations_ - '1' to show annotations, '3' to hide them
+* _title_ - '0' to hide the video's title and other information, '1' by default to show the information
+
+fn2. Not supported by the HTML5 player.
+
+h3. arc_if_youtube
+
+The arc_is_youtube tag is a _conditional tag_ and always used as an opening and closing pair. It will render the content between the tags if the video attribute is a valid Youtube URL.
+
+bc. <txp:arc_if_youtube video="[URL]"></txp:arc_if_youtube>
+
+h4. Parameters
+
+Use one or the other of the following:-
+
+* _custom_ - Name of the custom field containing video IDs/urls associated with article
+* _video_ - A URL to check if it is a valid Youtube URL
+
+h2(#help-section04). Examples
+
+h3. Example 1: Use custom field to associate video with an article
+
+bc. <txp:arc_youtube custom="Youtube" />
+
+h3. Example 2: Customise the appearance of the player and associate video with custom field
+
+bc. <txp:arc_youtube theme="light" modestbranding="1" custom="Youtube" />
+
+This will use the _light_ player theme with modest branding (__i.e.__ removes the Youtube logo from the controls). As example 1, the video is selected using an article's custom field called 'Youtube'.
+
+h3. Example 3: Small video player with fixed video
+
+bc. <txp:arc_youtube width="200" video="tgbNymZ7vqY" />
+
+Here the video is defined within the tag using the video attribute which has been given the value of Youtube's video ID, alternatively this value could have been the video's URL.
