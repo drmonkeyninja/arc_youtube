@@ -362,5 +362,3 @@ function _arc_youtube($video)
 }
 
 # --- END PLUGIN CODE ---
-
-?>
