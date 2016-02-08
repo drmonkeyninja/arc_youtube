@@ -2,7 +2,7 @@
 
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '2.0.3';
+$plugin['version'] = '2.0.4';
 $plugin['author'] = 'Andy Carter';
 $plugin['author_uri'] = 'http://andy-carter.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
