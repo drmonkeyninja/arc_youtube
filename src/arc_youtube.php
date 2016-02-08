@@ -141,7 +141,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 function arc_youtube($atts, $thing)
 {
-	global $thisarticle;
+    global $thisarticle;
 
     extract(lAtts(array(
         'video'     => '',
@@ -170,7 +170,7 @@ function arc_youtube($atts, $thing)
         'labeltag'  => '',
         'wraptag'   => '',
         'class'     => __FUNCTION__
-    ),$atts));
+    ), $atts));
 
     $custom = strtolower($custom);
     if (!$video && isset($thisarticle[$custom])) {
@@ -207,8 +207,8 @@ function arc_youtube($atts, $thing)
     }
 
     // Set the player UI's theme and colour.
-    $qString[] = 'theme=' . ($theme=='dark' ? 'dark' : 'light');
-    $qString[] = 'color=' . ($color=='red' ? 'red' : 'white');
+    $qString[] = 'theme=' . ($theme == 'dark' ? 'dark' : 'light');
+    $qString[] = 'color=' . ($color == 'red' ? 'red' : 'white');
 
     // Disable the fullscreen button in the AS3 player (not supported by the
     // newer HTML5 player).
@@ -222,15 +222,15 @@ function arc_youtube($atts, $thing)
     }
 
     // Determine the appearance of the player's controls.
-    if ($autohide!==null && in_array($autohide, array(0, 1, 2))) {
+    if ($autohide !== null && in_array($autohide, array(0, 1, 2))) {
         $qString[] = 'autohide=' . $autohide;
     }
-    if ($controls!==null && in_array($controls, array(0, 1, 2))) {
+    if ($controls !== null && in_array($controls, array(0, 1, 2))) {
         $qString[] = 'controls=' . $controls;
     }
 
     // Enable/Disable annotations display by default.
-    if ($annotations!==null && in_array($annotations, array(1, 3))) {
+    if ($annotations !== null && in_array($annotations, array(1, 3))) {
         $qString[] = 'iv_load_policy=' . $annotations;
     }
 
@@ -244,7 +244,7 @@ function arc_youtube($atts, $thing)
         $qString[] = 'modestbranding=1';
     }
 
-    if ($playsinline!==null && in_array($playsinline, array(0, 1))) {
+    if ($playsinline !== null && in_array($playsinline, array(0, 1))) {
         $qString[] = 'playsinline=' . $playsinline;
     }
 
@@ -277,12 +277,11 @@ function arc_youtube($atts, $thing)
     // If the width and/or height has not been set we want to calculate new
     // ones using the aspect ratio.
     if (!$width || !$height) {
-
         $toolbarHeight = 25;
 
         // Work out the aspect ratio.
         preg_match("/(\d+):(\d+)/", $ratio, $matches);
-        if ($matches[0] && $matches[1]!=0 && $matches[2]!=0) {
+        if ($matches[0] && $matches[1] != 0 && $matches[2] != 0) {
             $aspect = $matches[1]/$matches[2];
         } else {
             $aspect = 1.333;
@@ -300,23 +299,20 @@ function arc_youtube($atts, $thing)
 
     }
 
-    $out = '<iframe width="'.$width.'" height="'.$height
-      .'" src="'.$src.'" frameborder="0"'
-      .(($fs)?' allowfullscreen':'').'></iframe>';
+    $out = '<iframe width="' . $width . '" height="' . $height
+      . '" src="' . $src . '" frameborder="0"'
+      . (($fs)?' allowfullscreen':'') . '></iframe>';
 
     if ($link) {
-
-        $url = 'www.youtube.com/watch?v='.$v;
-        $out.= '<p><a href="http://'.$url.'" rel="external">'
-            .(($thing)?parse($thing):$url)
-            .'</a></p>';
+        $url = 'www.youtube.com/watch?v=' . $v;
+        $out .= '<p><a href="http://' . $url . '" rel="external">'
+            . (($thing)?parse($thing):$url)
+            . '</a></p>';
 
     }
 
     return doLabel($label, $labeltag).(($wraptag) ? doTag($out, $wraptag, $class) : $out);
-
 }
-
 
 function arc_if_youtube($atts, $thing)
 {
@@ -332,31 +328,25 @@ function arc_if_youtube($atts, $thing)
     return parse(EvalElse($thing, $result));
 }
 
-
 function _arc_youtube($video)
 {
     if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.youtube\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i", $video)) {
-
         $urlc = parse_url($video);
         $qstr = $urlc['query'];
         parse_str($qstr, $qarr);
 
         if (isset($qarr['v'])) {
-
             return array('v' => $qarr['v']);
 
         } elseif (isset($qarr['p'])) {
-
             return array('p' => $qarr['p']);
 
         } else {
-
             return false;
 
         }
 
-    }  elseif (preg_match("/^[a-zA-Z]+[:\/\/]+youtu\.be\/([A-Za-z0-9]+)/i", $video, $matches)) {
-
+    } elseif (preg_match("/^[a-zA-Z]+[:\/\/]+youtu\.be\/([A-Za-z0-9]+)/i", $video, $matches)) {
         return array('v' => $matches[1]);
 
     }
