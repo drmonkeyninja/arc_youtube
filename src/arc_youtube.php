@@ -137,6 +137,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 <?php
 }
 
+if (class_exists('\Textpattern\Tag\Registry')) {
+    // Register Textpattern tags for TXP 4.6+.
+    Txp::get('\Textpattern\Tag\Registry')
+        ->register('arc_youtube')
+        ->register('arc_if_youtube');
+}
+
 # --- BEGIN PLUGIN CODE ---
 
 function arc_youtube($atts, $thing)
