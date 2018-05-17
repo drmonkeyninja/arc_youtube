@@ -2,9 +2,9 @@
 
 $plugin['name'] = 'arc_youtube';
 
-$plugin['version'] = '2.0.4';
+$plugin['version'] = '2.0.5';
 $plugin['author'] = 'Andy Carter';
-$plugin['author_uri'] = 'http://andy-carter.com/';
+$plugin['author_uri'] = 'https://andy-carter.com/';
 $plugin['description'] = 'Embed Youtube videos with customised player';
 $plugin['type'] = 0;
 
@@ -17,25 +17,6 @@ if (0) {
 h1. arc_youtube
 
 Easily embed Youtube videos in articles and customise the appearance of the player. arc_youtube uses the new iframe player.
-
-h2. Table of contents
-
-# "Plugin requirements":#help-section01
-# "Installation":#help-section02
-# "Tags":#help-section03
-# "Examples":#help-section04
-# "Author":#help-section05
-# "License":#help-section06
-
-h2(#help-section01). Plugin requirements
-
-arc_youtube's minimum requirements:
-
-* Textpattern 4.5+
-
-h2(#help-section02). Installation
-
-To install go to the 'plugins' tab under 'admin' and paste the plugin code into the 'Install plugin' box, 'upload' and then 'install'. Please note that you will need to set-up a custom field to use for associating videos with articles, unless you choose to directly embed the new tag in the article text.
 
 h2(#help-section03). Tags
 
@@ -119,19 +100,13 @@ Here the video is defined within the tag using the video attribute which has bee
 
 h2(#help-section05). Author
 
-"Andy Carter":http://andy-carter.com. For other Textpattern plugins by me visit my "Plugins page":http://andy-carter.com/txp.
+"Andy Carter":https://andy-carter.com.
 
 h2(#help-section06). License
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Andy Carter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"License":https://github.com/drmonkeyninja/arc_youtube/blob/master/LICENSE
 
 # --- END PLUGIN HELP ---
 <?php
@@ -201,7 +176,7 @@ function arc_youtube($atts, $thing)
         return '';
     }
 
-    $src = '//www.youtube' . ($privacy ? '-nocookie' : '') . '.com/embed/';
+    $src = 'https://www.youtube' . ($privacy ? '-nocookie' : '') . '.com/embed/';
 
     $src .= !empty($v) ? $v : null;
 
@@ -312,7 +287,7 @@ function arc_youtube($atts, $thing)
 
     if ($link) {
         $url = 'www.youtube.com/watch?v=' . $v;
-        $out .= '<p><a href="http://' . $url . '" rel="external">'
+        $out .= '<p><a href="https://' . $url . '" rel="external">'
             . (($thing)?parse($thing):$url)
             . '</a></p>';
 

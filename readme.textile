@@ -4,6 +4,8 @@ A Textpattern plugin for easily embedding Youtube videos in pages using a custom
 
 This plugin works well with "arc_vimeo":https://github.com/drmonkeyninja/arc_vimeo and "oui_dailymotion":https://github.com/NicolasGraph/oui_dailymotion if you are looking to support Vimeo and DailyMotion too.
 
+*GDPR:* with the introduction of GDPR you may want to consider enabling the @privacy@ mode with this plugin so that cookies aren't automatically set on page load.
+
 h2. Table of contents
 
 # "Plugin requirements":#help-section01
